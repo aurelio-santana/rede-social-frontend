@@ -1,5 +1,3 @@
-
-
 import { UserCircle } from "@phosphor-icons/react";
 import Heading from "../Heading";
 import Text from "../Text";
@@ -8,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 function Profile() {
     const navigate = useNavigate();
-
     const name = localStorage.getItem("name");
-
     function handleLogout() {
         localStorage.clear();
         navigate("/");
@@ -35,7 +31,6 @@ function Profile() {
                 </Heading>
             </div>
         </div>
-        
     )
 }
 

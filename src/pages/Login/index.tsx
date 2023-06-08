@@ -3,7 +3,6 @@ import AuthForm, { Auth } from "../../components/AuthForm";
 import api from '../../services/api';
 import jwtDecode from 'jwt-decode';
 
-
 interface UserToken {
     userId: string;
     email: string
@@ -14,7 +13,6 @@ function Login() {
 
     async function handleLogin(auth: Auth) {
         try {
-            console.log("auth login", auth);
             const { data } = await api.post("/authentication", auth);
             const decodedToken = jwtDecode(data.token) as UserToken;
             localStorage.setItem("userId", data.userId);
@@ -25,20 +23,11 @@ function Login() {
                 const { data } = await api.get("/user/get", {params: {email: auth.email}});
                 localStorage.setItem("name", data.name);
             }
-
-            
-
             navigate("/home");
-
         } catch(err) {
             alert("Erro no login do usuário.");
         }
-
-        
     }
-
-
-
     return (
         <AuthForm
             authFormTitle="Faça o login e comece a usar!"

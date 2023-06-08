@@ -10,17 +10,12 @@ interface PostItemProps {
     handleLike: (postId: string) => void;
 }
 
-
 function PostItem({ post, handleLike }: PostItemProps) {
-
 
     function handleCreatedAt(createdAt: string) {
         const currDate = Date.now();
         const postDate = new Date(createdAt).getTime();
         const difDate = currDate - postDate;
-        console.log("currDate :", currDate);
-        console.log("postDate :", postDate);
-        console.log("difDate :", difDate);
 
         switch(true) {
             case (difDate<60000):
@@ -54,10 +49,6 @@ function PostItem({ post, handleLike }: PostItemProps) {
         }
     }
 
-
-
-
-
     return (
         <div className="border-b border-slate-500" key={post.id}>
             <Heading className="flex items-center ml-5 my-4">
@@ -86,8 +77,7 @@ function PostItem({ post, handleLike }: PostItemProps) {
                         <p>{post.content}</p>
                     </Text>
                     )
-                }
-                                
+                }                           
                 
             </div>
             <footer className="flex items-center ml-16 my-4 space-x-2">
@@ -108,7 +98,6 @@ function PostItem({ post, handleLike }: PostItemProps) {
                 <Text size="sm">{post.like.length}</Text>
             </footer>
         </div>
-
     )
 }
 

@@ -13,12 +13,6 @@ interface CreatePostDialogProps {
     postCreated?: (post: Post) => void;
 }
 
-const teste = {
-    "title": "titulo2",
-    "content": "conteudo post2",
-}
-
-
 interface PostFormElements extends HTMLFormControlsCollection {
     title: HTMLInputElement;
     content: HTMLInputElement;
@@ -31,30 +25,15 @@ interface PostFormElement extends HTMLFormElement {
 
 function CreatePostDialog({ postCreated }: CreatePostDialogProps) {
     const [selectedFile, setSelectedFile] = useState<File>();
-    const authHeader = getAuthHeader();
+    //const authHeader = getAuthHeader();
     const userId = getUserId();
-    console.log("userid", userId);
 
     async function handleSubmit(event: FormEvent<PostFormElement>) {
         event.preventDefault();
         const form = event.currentTarget;
 
-
-
-        
-/*         const formData2 = new FormData();
-        formData2.append("title", form.elements.title.value);
-        formData2.append("content", form.elements.content.value);
-        formData2.append("userId", userId);
-        if (selectedFile) {
-            formData2.append("file", selectedFile);
-        } */
-
-
         let formData;
-
         if (selectedFile) {
-            console.log("com file");
             formData = {
                 title: form.elements.title.value,
                 content: form.elements.content.value,
@@ -62,7 +41,6 @@ function CreatePostDialog({ postCreated }: CreatePostDialogProps) {
                 fileList: selectedFile
             };
             } else {
-                console.log("sem file");
                 formData = {
                 title: form.elements.title.value,
                 content: form.elements.content.value,
@@ -72,11 +50,7 @@ function CreatePostDialog({ postCreated }: CreatePostDialogProps) {
 
 
         try {
-            //const { data } = await api.post("/post/create", formData);
             const { data } = await api.post("/post/create", formData);
-            console.log("data return", data);
-            console.log("data return", data.userId);
-            
             postCreated && postCreated(data);
         } catch(err) {
             alert("Erro ao tentar salvar novo psot.");
@@ -103,7 +77,6 @@ function CreatePostDialog({ postCreated }: CreatePostDialogProps) {
                     </TextInput.Root>
 
                     <Dropzone onFileUploaded={setSelectedFile} />
-
 
                     <div className="mt-4 flex justify-end gap-4">
                         <Dialog.Close

@@ -6,7 +6,6 @@ import { Post } from "../../Model/Post";
 import MainScreen from "../../components/MainScreen";
 import PostDetailItem from "../PostDetailItem";
 
-
 function PostDetail() {
     const { postId } = useParams();
     const [postDetail, setPostDetail] = useState<Post>();
@@ -15,14 +14,10 @@ function PostDetail() {
         async function getPostDetail() {
             try {
                 const { data } = await api.get(`/post/get?id=${postId}`);
-                console.log("data", data);
-                console.log("len", data.comment.length);
-                /* const { data } = await api.get("/post/get", {params: {postId: postId}}); */
                 setPostDetail(data);
             } catch(err) {
                 alert("Erro ao tentar obter os detalhes do post.")
             }
-            
         }
 
         getPostDetail();

@@ -15,7 +15,6 @@ function like(post: Post, userId: string) {
     return post;
 }
 
-
 async function unlikePost(post: Post, userId: string): Promise<Post> {
     const request = {userId: userId}
     api.put(`/post/${post.id}/like`, request, {headers: {'Content-Type': 'multipart/form-data'}});
@@ -29,6 +28,5 @@ function unlike(post: Post, userId: string) {
     post.like.splice(index, 1);
     return post;
 }
-
 
 export { likePost, unlikePost };

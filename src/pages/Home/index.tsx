@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import api from '../../services/api'
 import { getAuthHeader, getUserId } from "../../services/auth";
-import Menu from "../../components/Menu";
 import Feed from "../../components/Feed";
 import MainScreen from "../../components/MainScreen";
 import { Post } from "../../Model/Post";
@@ -9,23 +8,14 @@ import { likePost, unlikePost } from "../../services/Posts";
 import { formatDate } from "../../components/DateTime";
 
 function Home() {
-
     const [posts, setPosts] = useState<Post[]>([]);
     const authHeader = getAuthHeader();
     const userId = getUserId();
-
 
     useEffect(() => {
         async function getPosts() {
             try {
                 const { data } = await api.get("/post/feed", {params: {userId: userId}});
-                //console.log("1",data);
-                console.log("2",data.posts[0]);
-                //console.log("2",data.posts[0][0].comment[5].createdAt);
-                //const olddate = data.posts[0][0].comment[5].createdAt;
-                //const newdate = formatDate(olddate);
-                //console.log("newdate :", newdate);
-
                 if (data.posts[0] == undefined)
                     return;
                 setPosts(data.posts[0]);
@@ -39,22 +29,13 @@ function Home() {
     }, []);
 
     async function postCreated(post: Post) {
-        console.log("nepossieklf", post);
         try {
-            console.log("home post id", post.id);
-            //const { data } = await api.get(`/post/get?id=${post}`, authHeader); //Alternativa
             const { data } = await api.get("/post/get", {params: {id: post}});
-
-            console.log("data home", data);
-            console.log("posts home", posts);
-
             if (posts == undefined)
                 setPosts((posts) => [data, posts]);
             else {
                 setPosts((posts) => [data, ... posts]);
-            }
-
-            
+            }    
         } catch(err) {
             alert("Erro ao tentar obter post salvo.");
         }

@@ -2,7 +2,6 @@ import { useDropzone } from "react-dropzone";
 import { useCallback, useState } from "react";
 import Text from "../Text";
 
-
 interface DropzoneProps {
     onFileUploaded: (file: File) => void;
 }
@@ -21,7 +20,6 @@ function Dropzone({ onFileUploaded }: DropzoneProps) {
         },
         [onFileUploaded]
     );
-
     
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
@@ -36,7 +34,6 @@ function Dropzone({ onFileUploaded }: DropzoneProps) {
             )}
         </div>
     );
-    
 }
 
 export default Dropzone;

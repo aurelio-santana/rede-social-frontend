@@ -16,12 +16,9 @@ function Menu(props: MenuProps) {
 
     const [open, setOpen] = useState(false);
     function postCreated(post: Post) {
-        console.log("post no menu" + post);
         setOpen(false);
         props.postCreated && props.postCreated(post);
-        console.log("props menu" + props.postCreated);
     }
-
 
     return (
         <div className="basis-1/6 border-r border-slate-400 ml-4 pt-4">

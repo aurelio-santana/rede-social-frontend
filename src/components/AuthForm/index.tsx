@@ -5,7 +5,7 @@ import Text from "../Text";
 import { TextInput } from "../TextInput";
 import Button from "../Button";
 
-import { Envelope, Lock } from '@phosphor-icons/react';
+import { Envelope } from '@phosphor-icons/react';
 import { Link } from "react-router-dom";
 import { FormEvent } from "react";
 

@@ -1,8 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
-import api from '../../services/api'
-import { getAuthHeader } from "../../services/auth";
+import { ReactNode } from "react";
 import Menu from "../../components/Menu";
-import Feed from "../../components/Feed";
+
 import { Post } from "../../Model/Post";
 
 
@@ -12,10 +10,6 @@ interface MainScreenProps {
 }
 
 function MainScreen(props: MainScreenProps) {
-    
-
-
-    console.log("post no mainscreen2" + props.children);
     return (
         <div className="w-screen h-screen flex">
             <Menu postCreated={props.postCreated} />

@@ -11,10 +11,7 @@ interface FeedProps {
 }
 
 function Feed({ posts, handleLike }: FeedProps) {
-    console.log("feed", posts);
-
     const name = getName();
-    
     return (
         <div className="basis-5/6 overflow-y-auto scroll-smoth">
             <Heading className="border-b border-slate-400 mt-4">

@@ -1,5 +1,3 @@
-
-
 function getAuthHeader() {
     const token = localStorage.getItem("accessToken");
     const authHeader = {

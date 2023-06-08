@@ -16,8 +16,6 @@ function MenuItemRoot(props: MenuItemProps) {
                 <div className="flex items-center px-4 rounded-full hover:bg-sky-400 ml-2">
                     {props.children}
 
-
-
                    {/*  <House size={48} className="text-slate-50" weight="fill"></House>
                     <Text className="font-extrabold ml-4">Página Inicial</Text> */}
                 </div>
@@ -32,7 +30,6 @@ interface MenuItemIconProps {
 
 function MenuItemIcon(props: MenuItemIconProps) {
     return (
-
         <Slot className="text-slate-50 text-5xl" weight="fill">
             {props.children}
         </Slot>

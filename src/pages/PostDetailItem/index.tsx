@@ -44,39 +44,28 @@ function PostDetailItem({ postDetail, setPostDetail }: PostDetailItemProps) {
     async function handleSaveComment(event: FormEvent<CommentFormElment>) {
         event.preventDefault();
         const form = event.currentTarget;
-
         const data = {
             userId: userId, //TODO getAuthHeader
             content: form.elements.description.value,
-
         }
-
         try {
             await api.post(`/post/${postDetail.id}/comment/create`, data, getAuthHeader());
-
-            //const response = await api.get(`/post/${postDetail.id}`, getAuthHeader());
             const response = await api.get("/post/get", {params: {id: postDetail.id}});
             setPostDetail(response.data);
-
             form.elements.description.value = "";
         } catch (err) {
             alert("Erro ao tentar salvar comentário.")
         }
-        
     }
 
     function handleCreatedAt(createdAt: string) {
         const currDate = Date.now();
         const postDate = new Date(createdAt).getTime();
         const difDate = currDate - postDate;
-        console.log("currDate :", currDate);
-        console.log("postDate :", postDate);
-        console.log("difDate :", difDate);
 
         switch(true) {
             case (difDate<60000):
                 return "agora"; //seconds
-
             case (difDate<3600000): { //36 = 1hr  
                 const time = Math.floor(difDate/60000)
                 if (time == 1)
@@ -103,11 +92,6 @@ function PostDetailItem({ postDetail, setPostDetail }: PostDetailItemProps) {
             }
             default: return "erro na data"
         }
-
-
-/*         if (createdAt == null)
-            return 0;
-        else return formatDate(createdAt); */
     }
 
     //TODO async function handleLikeComment() {}
@@ -167,18 +151,13 @@ function PostDetailItem({ postDetail, setPostDetail }: PostDetailItemProps) {
                             <Heart size={14} className="text-slate-50" />
                             <Text className="text-[10px]">{2775}</Text>
                             </div>
-
-                            
                         </li>
                     ))}
                 </ul>
             </section>
         </div>
-
     );
     
 }
-
-
 
 export default PostDetailItem;

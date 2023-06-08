@@ -15,14 +15,12 @@ function SignUp() {
         }
     }
 
-
     return (
         <AuthForm 
             authFormTitle="Faça o cadastro e comece a usar!"
             submitFormButtonText="Cadastrar" 
             routeName="/"
             submitFormButtonAction={handleRegister}
-            
         />
     );
 }

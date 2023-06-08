@@ -9,7 +9,6 @@ export interface HeadingProps {
     className?: string; 
 }
 
-
 function Heading({ size = "md", asChild, children, className, ... props }: HeadingProps) {
     const Comp = asChild ? Slot : "h2";
 

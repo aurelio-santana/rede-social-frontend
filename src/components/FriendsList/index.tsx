@@ -13,22 +13,16 @@ interface Profile {
     followers: string[]
 }
 
-
 function FriendList() {
     const authHeader = getAuthHeader();
     const myProfileId = getUserId();
-/*  const [profiles, setProfiles] = useState<Profile[]>([]); */
     const [profiles, setProfiles] = useState<Profile[]>([]);
 
-    
     useEffect(() => {
         async function getProfiles() {
             try {
                 const { data } = await api.get("/user/get/all", authHeader);    
                 setProfiles(data.users);
-
-/*                 const followList = await api.get("/user/follow/get/id", {params: {userId: myProfileId}});
-                console.log("follolist :", followList.data); */
             } catch(err) {
                 alert("Erro ao tentar obter os perfis");
             }
@@ -36,17 +30,9 @@ function FriendList() {
         
         getProfiles();      
     }, []);
-/*     const user = localStorage.getItem("user");
-    console.log("prof2",profiles);
-    profiles.map(users => console.log("map", users)); */
-
 
     async function handleFollow(profileId: string) {
         try {
-            /* const [profile, ... rest] = profiles.filter(profile => profile._id == profileId);
-            !profile.followers.includes(myProfileId) && (await api.post(`/profiles/${profileId}/follow`, null, authHeader)); */
-            //await api.post(`/profiles/${profileId}/follow`, null, authHeader);
-
             const request = {
                 userId: myProfileId,
                 userIdToFollow: profileId,
@@ -55,7 +41,6 @@ function FriendList() {
         
             /* setProfiles((profiles) => {
                 const newProfiles = profiles.map((profile) => {
-                    console.log("prof dosetprof", profile)
                     if (profile.id == profileId) {
                         !profile.followers.includes(myProfileId) && profile.followers.push(myProfileId) ;
                     }
@@ -112,7 +97,6 @@ function FriendList() {
                     </li>
                 ))}
             </ul>
-            
         </div>
     );
 }
