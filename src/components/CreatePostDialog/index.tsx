@@ -2,7 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { TextInput } from "../TextInput"
 import Text from "../Text";
 import Button from "../Button";
-import { getAuthHeader } from "../../services/auth";
+import { getAuthHeader, getUserId } from "../../services/auth";
 import api from "../../services/api";
 import { Post } from "../../Model/Post";
 import Dropzone from "../Dropzone";
@@ -32,37 +32,55 @@ interface PostFormElement extends HTMLFormElement {
 function CreatePostDialog({ postCreated }: CreatePostDialogProps) {
     const [selectedFile, setSelectedFile] = useState<File>();
     const authHeader = getAuthHeader();
+    const userId = getUserId();
+    console.log("userid", userId);
+
     async function handleSubmit(event: FormEvent<PostFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
+        event.preventDefault();
+        const form = event.currentTarget;
 
-/*     const formData = new FormData();
-    formData.append("title", form.elements.title.value);
-    formData.append("content", form.elements.content.value); */
 
-    let formData;
 
-    if (selectedFile) {
-        formData = {
-            title: form.elements.title.value,
-            content: form.elements.content.value,
-            file: selectedFile
-        };
-        } else {
+        
+/*         const formData2 = new FormData();
+        formData2.append("title", form.elements.title.value);
+        formData2.append("content", form.elements.content.value);
+        formData2.append("userId", userId);
+        if (selectedFile) {
+            formData2.append("file", selectedFile);
+        } */
+
+
+        let formData;
+
+        if (selectedFile) {
+            console.log("com file");
             formData = {
-            title: form.elements.title.value,
-            content: form.elements.content.value,
+                title: form.elements.title.value,
+                content: form.elements.content.value,
+                userId: userId, //TODO authHeader
+                fileList: selectedFile
+            };
+            } else {
+                console.log("sem file");
+                formData = {
+                title: form.elements.title.value,
+                content: form.elements.content.value,
+                userId: userId, //TODO authHeader
+                }
             }
+
+
+        try {
+            //const { data } = await api.post("/post/create", formData);
+            const { data } = await api.post("/post/create", formData);
+            console.log("data return", data);
+            console.log("data return", data.userId);
+            
+            postCreated && postCreated(data);
+        } catch(err) {
+            alert("Erro ao tentar salvar novo psot.");
         }
-    
-
-    try {
-        const { data } = await api.post("/post/create", formData, authHeader);
-
-        postCreated && postCreated(data);
-    } catch(err) {
-        alert("Erro ao tentar salvar novo psot.");
-    }
 }
     return (
         <Dialog.Portal>

@@ -12,6 +12,10 @@ interface MainScreenProps {
 }
 
 function MainScreen(props: MainScreenProps) {
+    
+
+
+    console.log("post no mainscreen2" + props.children);
     return (
         <div className="w-screen h-screen flex">
             <Menu postCreated={props.postCreated} />

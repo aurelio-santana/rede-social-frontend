@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
     const navigate = useNavigate();
 
-    const user = localStorage.getItem("user");
+    const name = localStorage.getItem("name");
 
     function handleLogout() {
         localStorage.clear();
@@ -27,7 +27,7 @@ function Profile() {
                     <div className="ml-5 my-4 w-full max-W-SM">
                         <div className="flex items-center flex-1 my-4">
                             <UserCircle size={48} weight="light" />
-                            <Text className="font-extrabold ml-2">{user}</Text>
+                            <Text className="font-extrabold ml-2">{name}</Text>
 
                         </div>
                         <Button onClick={handleLogout}>Sair</Button>

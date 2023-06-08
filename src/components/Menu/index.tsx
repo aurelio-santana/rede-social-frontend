@@ -16,8 +16,10 @@ function Menu(props: MenuProps) {
 
     const [open, setOpen] = useState(false);
     function postCreated(post: Post) {
+        console.log("post no menu" + post);
         setOpen(false);
         props.postCreated && props.postCreated(post);
+        console.log("props menu" + props.postCreated);
     }
 
 

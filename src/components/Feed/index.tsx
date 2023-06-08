@@ -11,6 +11,7 @@ interface FeedProps {
 }
 
 function Feed({ posts, handleLike }: FeedProps) {
+    console.log("feed", posts);
 
     const name = getName();
     
@@ -26,10 +27,23 @@ function Feed({ posts, handleLike }: FeedProps) {
                 </div>
             </Heading>
             <section>
-                {posts &&
-                posts.map((post: Post) => (
-                    <PostItem post={post} handleLike={handleLike} key={post._id}></PostItem>
-                ))}
+            {posts == undefined || posts.length == 0 ? (
+                <div className="flex flex-col colum content-center items-center mt-6">
+                    <Text size="lg" className="font-extrabold ml-5">
+                        Sem posts a serem exibidos.
+                    </Text>
+                    <Text size="sm" className="ml-5">
+                        Você ainda não segue ninguem, ou as pessoas que você segue não publicaram nenhum post.
+                    </Text>
+                </div>
+            ) : (
+                <div>
+                    {posts &&
+                    posts.map((post: Post) => (
+                        <PostItem post={post} handleLike={handleLike} key={post.id}></PostItem>
+                    ))}
+                </div>
+            )}
             </section>
         </div>
     )

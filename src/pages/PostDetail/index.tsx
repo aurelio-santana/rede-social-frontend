@@ -14,7 +14,10 @@ function PostDetail() {
     useEffect(() => {
         async function getPostDetail() {
             try {
-                const { data } = await api.get("/post/get", {params: {postId: postId}});
+                const { data } = await api.get(`/post/get?id=${postId}`);
+                console.log("data", data);
+                console.log("len", data.comment.length);
+                /* const { data } = await api.get("/post/get", {params: {postId: postId}}); */
                 setPostDetail(data);
             } catch(err) {
                 alert("Erro ao tentar obter os detalhes do post.")

@@ -1,17 +1,21 @@
 export interface Post {
-    _id: string,
+    id: string,
     title: string,
     content: string,
     name: string,
 
     comment: [
         {
-            _id: string;
+            id: string;
             name: string;
             content: string;
+            createdAt: string;
         }
     ];
     like: string[];
-    image: boolean; 
+    likes: number;
+    image: boolean;
+
+    createdAt: string; 
 
 }

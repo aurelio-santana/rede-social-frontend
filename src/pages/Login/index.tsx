@@ -14,6 +14,7 @@ function Login() {
 
     async function handleLogin(auth: Auth) {
         try {
+            console.log("auth login", auth);
             const { data } = await api.post("/authentication", auth);
             const decodedToken = jwtDecode(data.token) as UserToken;
             localStorage.setItem("userId", data.userId);
