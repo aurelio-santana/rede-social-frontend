@@ -50,7 +50,12 @@ function CreatePostDialog({ postCreated }: CreatePostDialogProps) {
 
 
         try {
-            const { data } = await api.post("/post/create", formData);
+            const { data } = await api.post("/post/create", formData, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "multipart/form-data",
+                }
+            });
             postCreated && postCreated(data);
         } catch(err) {
             alert("Erro ao tentar salvar novo psot.");

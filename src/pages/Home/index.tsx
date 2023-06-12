@@ -31,6 +31,7 @@ function Home() {
     async function postCreated(post: Post) {
         try {
             const { data } = await api.get("/post/get", {params: {id: post}});
+            console.log("home data", data);
             if (posts == undefined)
                 setPosts((posts) => [data, posts]);
             else {

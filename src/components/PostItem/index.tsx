@@ -12,6 +12,8 @@ interface PostItemProps {
 
 function PostItem({ post, handleLike }: PostItemProps) {
 
+    console.log("img :",post);
+
     function handleCreatedAt(createdAt: string) {
         const currDate = Date.now();
         const postDate = new Date(createdAt).getTime();
@@ -67,11 +69,17 @@ function PostItem({ post, handleLike }: PostItemProps) {
                     </Text>
                 </Link>
                 
-                {post.image ? (
-                    <img
-                        src={`http://localhost:9000/${post.content}`}
-                        className="max-w-lg rounded-lg"
-                    ></img>
+                {post.photoUri ? (
+                    <div>
+                        <Text className="mb-4" asChild>
+                            <p>{post.content}</p>
+                        </Text>
+                        <img
+                            /* src={`http://localhost:9000/${post.image}`} */
+                            src={post.photoUri}
+                            className="max-w-lg rounded-lg"
+                        ></img>
+                    </div>
                 ) : (
                     <Text asChild>
                         <p>{post.content}</p>
