@@ -16,17 +16,22 @@ function Home() {
         async function getPosts() {
             try {
                 const { data } = await api.get("/post/feed", {params: {userId: userId}});
-                if (data.posts[0] == undefined)
-                    return;
-                setPosts(data.posts[0]);
 
+                const feed: Post[] = []
+                data.posts.forEach((post: Post[]) => {
+                    feed.push(... post);
+                });
+                
+                setPosts(feed);
             } catch (err) {
                 alert("Erro ao obter o Feed.");
             } 
         }
 
         getPosts();
+        console.log("posts after ", posts);
     }, []);
+    console.log("posts after ", posts);
 
     async function postCreated(post: Post) {
         try {
